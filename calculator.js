@@ -1,28 +1,17 @@
 function b_block_calculate_init() {
     var b_block_calculate = {
         init: function () {
-            console.log('------ [ ready ]');
-
             var num = 1;
-            console.log('------ [ new table ]');
             var table = this.createFormElements.table();
             $('<caption></caption>')
-            // .text('Расчёт материалов и работы')
-            // .appendTo(table)
-            // .clone()
                 .text('Укажите площадь и толщину')
                 .appendTo(table)
             ;
 
-            console.log('------ [ new header ]');
             this.createFormElements.headerTh(table);
-
-            console.log('------ [ new calculator form ]');
             this.createFormElements.lineCalculatorForm(num);
-            console.log('------ [ add tbody ]');
-            table.append(this.activeElements.tbody);
 
-            console.log('------ [ new footer ]');
+            table.append(this.activeElements.tbody);
             this.createFormElements.footerTr(table);
 
             var calculator_of_materials_and_works = $("#calculator_of_materials_and_works");
@@ -31,20 +20,11 @@ function b_block_calculate_init() {
             table = $('<table></table>')
                 .attr('style', 'margin-left: 0; border: 0px solid black; margin-top: 25px;');
 
-            // $('<caption></caption>')
-            //     .text('Расчёт этажа')
-            //     .appendTo(table)
-            // ;
-
             calculator_of_materials_and_works.append(table);
             var tr = $('<tr></tr>');
             $('<th></th>')
                 .attr('style', 'font-size: 1.2rem; border: 1px solid #ddd; text-align: center;')
                 .attr('colspan', '2')
-                // .text('Укажите этаж')
-                // .appendTo(tr)
-                // .clone()
-                // .text('Сумма грн.')
 
                 .text('Расчёт этажа')
                 .appendTo(tr)
@@ -77,7 +57,6 @@ function b_block_calculate_init() {
 
             b_block_calculate.activeElements.etazhSum = $('<th></th>')
                 .attr('style', 'border: 1px solid #ddd; text-align: center; min-width: 105px;')
-                // .attr('colspan', '2')
                 .html('Укажите этаж')
                 .appendTo(tr2)
                 .clone()
@@ -86,7 +65,6 @@ function b_block_calculate_init() {
                 .append($('<div></div>').addClass('noFormField').html(0))
                 .appendTo(tr2)
                 .clone()
-                // .html('Куда - ')
                 .attr('colspan', '2')
                 .html(b_block_calculate.activeElements.carWhere)
                 .append($('<div></div>').addClass('noFormField').html(0))
@@ -114,51 +92,6 @@ function b_block_calculate_init() {
                 .append(tr2)
                 .append(tr3)
                 .appendTo(table);
-
-            // tr = $('<tr></tr>');
-            // $('<td></td>')
-            //     .attr('style', 'vertical-align: bottom; text-align: center; border: 1px solid #ddd; border-left: 0; border-right: 0; height: 50px;')
-            //     .attr('colspan', '4')
-            //     .text('Расчёт транспорта')
-            //     .appendTo(tr)
-            // ;
-
-            // tr2 = $('<tr></tr>').attr('style', 'font-size: .857rem; text-align: center;');
-            // $('<td></td>')
-            //     .text('Количество машин')
-            //     .appendTo(tr2)
-            //     .clone()
-            //     .text('Куда')
-            //     .attr('colspan', '2')
-            //     .appendTo(tr2)
-            //     .clone()
-            //     .text('Сумма')
-            //     .attr('colspan', '1')
-            //     .appendTo(tr2)
-            // ;
-
-            // tr3 = $('<tr></tr>').attr('style', 'text-align: center;');
-            // b_block_calculate.activeElements.carCount = $('<input />')
-            //     .addClass('calculatorField')
-            //     .attr('style', 'width: 106px;')
-            // ;
-
-            // b_block_calculate.activeElements.carSum = $('<td></td>')
-            //     .attr('style', 'border: 1px solid #ddd;')
-            //     .html(b_block_calculate.activeElements.carCount)
-            //     .append($('<div></div>').addClass('noFormField').html(0))
-            //     .appendTo(tr3)
-            //     .clone()
-            //     // .html(b_block_calculate.activeElements.carWhere)
-            //     .append($('<div></div>').addClass('noFormField').html(0))
-            //     .attr('colspan', '2')
-            //     .appendTo(tr3)
-            //     .clone()
-            //     .attr('style', 'border: 1px solid #ddd; width: 100px;')
-            //     .text('0')
-            //     .attr('colspan', '1')
-            //     .appendTo(tr3)
-            // ;
 
             tr4 = $('<tr></tr>');
             $('<td></td>')
@@ -200,20 +133,13 @@ function b_block_calculate_init() {
             ;
 
             $('<tbody></tbody>')
-            // .append(tr)
-            // .append(tr2)
-            // .append(tr3)
                 .append(tr4)
                 .append(b_block_calculate.activeElements.sumFinale)
                 .append(b_block_calculate.activeElements.sumFinaleBySquare)
                 .appendTo(table)
             ;
 
-            //calculator_of_materials_and_works.append(b_block_calculate.activeElements.sumFinale);
-            //calculator_of_materials_and_works.append(b_block_calculate.activeElements.sumFinaleBySquare);
-
             $(".calculatorField").change(function() {
-                console.log('------ --- (EF) - change -----------------');
                 b_block_calculate.activeElements.calculateFinaleSum();
             });
         },
@@ -348,7 +274,7 @@ function b_block_calculate_init() {
                 return $('<input />')
                     .attr('style', 'width: 100px;')
                     .addClass('calculatorField')
-                    ;
+                ;
             },
             selectThickness: function () {
                 var select = $('<select></select>')
@@ -383,7 +309,7 @@ function b_block_calculate_init() {
                 $.each(lines, function (index, values) {
                     var inputTd = $(values).children('td')[1];
                     var inputVal = $(inputTd).children('input');
-                    console.info('------- --- ---val----', inputVal.val(), inputVal.val() < 1);
+
                     if(inputVal.val() < 1) {
                         return true;
                     }
@@ -405,20 +331,13 @@ function b_block_calculate_init() {
                     $($(tdVal[1]).find('div')[0]).html(square);
                     $($(tdVal[2]).find('div')[0]).html(selectVal);
 
-                    console.log('------');
-                    console.log('------');
-                    console.log('------');
-                    console.log('------ --- (EF) -< square: ', square);
-                    console.log('------ --- (EF) -< sel: ', selectVal);
-                    console.log('------');
-
                     if(square > 0) {
                         $.each(b_block_calculate.settings, function(index, valuesSquare) {
                             if(selectVal == valuesSquare.text){
-                                console.log('------ --- (EF) -< settings: ', index, selectVal == valuesSquare.text);
+
                                 $.each(valuesSquare.square, function(ind, values) {
                                     if(square >= values.minRange && square < values.maxRange){
-                                        console.log('------ --- (EF) -< settings: ', ind, square >= values.minRange, square <= values.maxRange);
+
                                         var sum1 = square * values.priceOfMaterials;
                                         var sum2 = square * values.priceOfWorks;
 
@@ -447,10 +366,6 @@ function b_block_calculate_init() {
                     }
                 });
 
-                console.log('------ --- (EF) -< sumSquare: ', sumSquare);
-                console.log('------ --- (EF) -< sumElements: ', sumElements);
-                console.log('------ --- (EF) -< sumSquare: ', sumWorks);
-
                 this.sumSquare.html(sumSquare);
                 this.sumElements.html(sumElements);
                 this.sumWorks.html(sumWorks);
@@ -468,9 +383,6 @@ function b_block_calculate_init() {
                 } else if (inputEtazh > 0) {
                     sumPriceEtazh = 300;
                 }
-                // b_block_calculate.activeElements.etazhSum.html(sumPriceEtazh);
-                // b_block_calculate.activeElements.etazh.parent().children('div').html(inputEtazh);
-                // console.info(b_block_calculate.activeElements.carWhere);
 
                 var carWhereListLabel = {
                     '1': 'По городу',
@@ -483,48 +395,34 @@ function b_block_calculate_init() {
                     '3': 2600,
                 };
                 var carCount = 1;
-                // var carCount = parseInt(b_block_calculate.activeElements.carCount.val(), 10);
-                // if(!carCount > 0){
-                //     carCount = 0;
-                // }
+
                 var carWhere = b_block_calculate.activeElements.carWhere.val();
                 b_block_calculate.activeElements.carWhere.parent().children('.noFormField').html(carWhereListLabel[carWhere]);
                 var carSum = carWhereList[carWhere] * carCount;
                 if(isNaN(carSum)){
                     carSum = 0;
                 }
-                // b_block_calculate.activeElements.carSum.html(carSum);
-                // b_block_calculate.activeElements.carCount.parent().children('div').html(carCount);
-                // b_block_calculate.activeElements.carWhere.parent().children('div').html(carWhereListLabel[carWhere]);
 
                 b_block_calculate.activeElements.trEtazhSum.html(sumPriceEtazh + ' грн.');
                 b_block_calculate.activeElements.trCarSum.html(carSum + ' грн.');
-                console.log('------');
-                console.log('------ --- (EF) -< carCount: ', carCount);
-                console.log('------ --- (EF) -< carWhere: ', carWhere);
-                console.log('------ --- (EF) -< carSum: ', carSum);
-                console.log('------ --- (EF) -< issetEmptyLine: ', issetEmptyLine);
 
                 var sumFinale = sumElements + sumWorks + sumPriceEtazh + carSum;
                 var sumFinaleBySquare = sumFinale / sumSquare;
-                console.info('[                   ]', sumFinaleBySquare);
+
                 if(!isFinite(sumFinaleBySquare)){
                     sumFinaleBySquare = 0;
                 } else if(sumFinaleBySquare.toString().indexOf(".") > 0) {
                     sumFinaleBySquare = sumFinaleBySquare.toFixed(2);
                 }
 
-                console.info('[                   ]', !isFinite(sumFinaleBySquare));
-                console.info('[                   ]', sumFinaleBySquare.toString().indexOf(".") > 0);
-
                 var blsockSumFinale = b_block_calculate.activeElements.sumFinale.children('td');
                 var blsockSumFinaleBySquare = b_block_calculate.activeElements.sumFinaleBySquare.children('td');
 
                 $(blsockSumFinale[2]).html(sumFinale);
                 $(blsockSumFinaleBySquare[1]).html(sumFinaleBySquare);
-                console.info('[                   ]', $(blsockSumFinaleBySquare[2]));
+
                 if(!issetEmptyLine){
-                    console.log('------ --- --- next');
+
                     var newTr = b_block_calculate
                         .activeElements
                         .lineCalculatorForm
@@ -559,31 +457,14 @@ function b_block_calculate_init() {
                     if($($(value).children('td')[1]).find('.noFormField').text() === ''
                         || $($(value).children('td')[1]).find('.noFormField').text() === '0'
                     ){
-                        console.error('remove!');
                         value.remove();
-                    } else {
-                        console.log({
-                            children_td_test: $($(value).children('td')[1]).find('.noFormField').text() === '',
-                            noFormField_text: $($(value).children('td')[1]).find('.noFormField').text(),
-                            if_: $($(value).children('td')[1]).find('.noFormField').text() === '0'
-                        });
                     }
                 });
 
-                console.log('--------------------re!');
-                console.log('--------------------re!');
-                console.log('--------------------re!');
-
                 var result_re_HTML = qqq.html();
-                //var result_re_ob = $('test_re_c_tag');
-
-
                 var input_to_form = $('input.form_field_text[name="form[17778]"][type="hidden"]');
 
                 input_to_form.val(result_re_HTML);
-
-                //var tetstdsdd = input_to_form.val();
-                //result_re_ob.html(tetstdsdd);
             }
         },
         settings: {
